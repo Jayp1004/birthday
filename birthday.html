@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<title>Jay's Level 23 🎂</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --gold:#f5c451;
+  --gold2:#ffe7a0;
+  --bg:#070707;
+  --card:#111111;
+  --muted:#999;
+  --border:rgba(245,196,81,.22);
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+body{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:white;
+}
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(245,196,81,.12),
+      transparent 38%
+    );
+  z-index:-2;
+}
+
+.stars{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+
+.star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:var(--gold);
+  opacity:.5;
+  animation:starFloat linear infinite;
+}
+
+@keyframes starFloat{
+  from{
+    transform:translateY(105vh);
+    opacity:0;
+  }
+  20%{opacity:.7}
+  80%{opacity:.7}
+  to{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
+}
+
+/* =====================================================
+   APP
+===================================================== */
+
+.app{
+  width:100%;
+  height:100dvh;
+  position:relative;
+  overflow:hidden;
+}
+
+/* =====================================================
+   SCREENS
+===================================================== */
+
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:
+    max(24px,env(safe-area-inset-top))
+    22px
+    max(24px,env(safe-area-inset-bottom));
+
+  opacity:0;
+  visibility:hidden;
+  transform:translateX(40px) scale(.98);
+  transition:
+    opacity .35s ease,
+    transform .35s ease,
+    visibility .35s ease;
+
+  overflow:hidden;
+}
+
+.screen.active{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(0) scale(1);
+}
+
+/* =====================================================
+   TOP LABEL
+===================================================== */
+
+.label{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:15px;
+  text-align:center;
+}
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro-content{
+  width:min(600px,100%);
+  text-align:center;
+}
+
+.intro-emoji{
+  font-size:58px;
+  margin-bottom:15px;
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.intro-title{
+  font-size:clamp(48px,14vw,90px);
+  line-height:.9;
+  letter-spacing:-4px;
+  font-weight:900;
+  margin-bottom:20px;
+}
+
+.intro-title span{
+  color:var(--gold);
+}
+
+.intro-subtitle{
+  color:#aaa;
+  line-height:1.6;
+  max-width:480px;
+  margin:auto;
+}
+
+.countdown{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin:30px 0;
+}
+
+.time{
+  min-width:64px;
+}
+
+.time-number{
+  font-size:34px;
+  font-weight:900;
+}
+
+.time-label{
+  color:#666;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-top:4px;
+}
+
+.separator{
+  color:var(--gold);
+  font-size:28px;
+  margin-top:-15px;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.primary{
+  width:100%;
+  max-width:340px;
+  padding:17px 22px;
+  border:none;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ffd968,#eaae36);
+  color:#111;
+  font-size:15px;
+  font-weight:900;
+  box-shadow:0 12px 35px rgba(245,196,81,.18);
+  transition:.2s;
+}
+
+.primary:active{
+  transform:scale(.96);
+}
+
+.secondary{
+  width:100%;
+  max-width:340px;
+  padding:15px 20px;
+  border:1px solid #333;
+  border-radius:14px;
+  background:#111;
+  color:white;
+  font-weight:800;
+  margin-top:10px;
+}
+
+/* =====================================================
+   CELEBRATION
+===================================================== */
+
+.celebration-icon{
+  font-size:80px;
+  animation:celebrate .8s ease;
+}
+
+@keyframes celebrate{
+  0%{
+    transform:scale(.2) rotate(-20deg);
+    opacity:0;
+  }
+  70%{
+    transform:scale(1.2) rotate(5deg);
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.celebration h1{
+  text-align:center;
+  font-size:clamp(40px,12vw,70px);
+  line-height:.95;
+  margin:20px 0;
+  letter-spacing:-3px;
+}
+
+.celebration h1 span{
+  color:var(--gold);
+}
+
+.celebration p{
+  color:#aaa;
+  text-align:center;
+  line-height:1.7;
+  max-width:420px;
+}
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress{
+  position:absolute;
+  top:18px;
+  left:22px;
+  right:22px;
+  height:4px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:25%;
+  background:var(--gold);
+  transition:.4s;
+}
+
+/* =====================================================
+   LOOT SCREEN
+===================================================== */
+
+.loot-title{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:8px;
+}
+
+.loot-subtitle{
+  color:#888;
+  text-align:center;
+  font-size:14px;
+  margin-bottom:28px;
+}
+
+.boxes{
+  width:100%;
+  max-width:420px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.mystery-box{
+  height:150px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:
+    linear-gradient(
+      145deg,
+      #191919,
+      #0c0c0c
+    );
+  color:white;
+  font-size:55px;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+.mystery-box:active{
+  transform:scale(.92);
+}
+
+.mystery-box.opened{
+  transform:rotateY(180deg);
+  background:#1b1608;
+}
+
+.loot-result{
+  min-height:75px;
+  margin-top:20px;
+  text-align:center;
+  color:var(--gold2);
+  font-size:16px;
+  font-weight:800;
+  line-height:1.5;
+}
+
+/* =====================================================
+   WISHLIST
+===================================================== */
+
+.wishlist-title{
+  font-size:36px;
+  text-align:center;
+  margin-bottom:7px;
+}
+
+.wishlist-sub{
+  color:#888;
+  text-align:center;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.gift-slider{
+  width:100%;
+  max-width:390px;
+}
+
+.gift-card{
+  display:none;
+  padding:30px 25px;
+  border:1px solid var(--border);
+  border-radius:24px;
+  background:
+    linear-gradient(
+      145deg,
+      #151515,
+      #0d0d0d
+    );
+  text-align:center;
+  min-height:300px;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.gift-card.active{
+  display:flex;
+  animation:cardIn .3s ease;
+}
+
+@keyframes cardIn{
+  from{
+    opacity:0;
+    transform:translateX(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+.gift-icon{
+  font-size:65px;
+  margin-bottom:15px;
+}
+
+.gift-card h2{
+  font-size:27px;
+  margin-bottom:10px;
+}
+
+.gift-card p{
+  color:#999;
+  line-height:1.6;
+  font-size:14px;
+  max-width:280px;
+}
+
+.gift-price{
+  color:var(--gold);
+  font-weight:900;
+  margin:16px 0 20px;
+}
+
+.gift-select{
+  width:100%;
+  padding:13px;
+  border:1px solid #333;
+  border-radius:11px;
+  background:#111;
+  color:white;
+  font-weight:800;
+}
+
+.slider-controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  margin-top:15px;
+}
+
+.arrow{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid #333;
+  background:#111;
+  color:white;
+  font-size:18px;
+}
+
+.dots{
+  color:#777;
+  font-size:12px;
+}
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+.money-title{
+  font-size:34px;
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.money-sub{
+  color:#999;
+  text-align:center;
+  line-height:1.6;
+  max-width:380px;
+  font-size:14px;
+  margin-bottom:24px;
+}
+
+.amounts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  width:100%;
+  max-width:360px;
+}
+
+.amount{
+  padding:16px;
+  border-radius:13px;
+  border:1px solid #333;
+  background:#111;
+  color:white;
+  font-size:15px;
+  font-weight:900;
+}
+
+.amount.selected{
+  background:var(--gold);
+  color:#111;
+  border-color:var(--gold);
+}
+
+.custom{
+  width:100%;
+  max-width:360px;
+  padding:15px;
+  border-radius:13px;
+  border:1px solid #333;
+  background:#0e0e0e;
+  color:white;
+  outline:none;
+  margin:12px 0;
+  font-size:15px;
+  text-align:center;
+}
+
+.custom:focus{
+  border-color:var(--gold);
+}
+
+/* =====================================================
+   QR MODAL
+===================================================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(10px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(390px,100%);
+  padding:28px 22px;
+  border:1px solid var(--border);
+  border-radius:25px;
+  background:#131313;
+  text-align:center;
+  animation:modalIn .3s ease;
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.modal-box h2{
+  margin-bottom:7px;
+}
+
+.modal-box p{
+  color:#888;
+  font-size:13px;
+}
+
+.qr{
+  width:230px;
+  height:230px;
+  margin:20px auto;
+  padding:8px;
+  background:white;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#upiQr{
+  width:210px;
+  height:210px;
+}
+
+#upiQr img,
+#upiQr canvas{
+  width:100%!important;
+  height:100%!important;
+}
+
+.upi-id{
+  color:var(--gold);
+  font-weight:900;
+  margin-top:8px;
+}
+
+.close{
+  margin-top:12px;
+  border:none;
+  background:transparent;
+  color:#777;
+  padding:10px;
+}
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+.final-icon{
+  font-size:70px;
+  margin-bottom:20px;
+}
+
+.final h1{
+  text-align:center;
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+.final p{
+  text-align:center;
+  color:#999;
+  line-height:1.7;
+  max-width:400px;
+}
+
+.level-complete{
+  margin:25px 0;
+  padding:12px 20px;
+  border:1px solid var(--border);
+  border-radius:50px;
+  color:var(--gold);
+  font-weight:900;
+}
+
+/* =====================================================
+   WHATSAPP MODAL
+===================================================== */
+
+.form-input{
+  width:100%;
+  padding:13px;
+  margin-top:9px;
+  border:1px solid #333;
+  border-radius:10px;
+  background:#0b0b0b;
+  color:white;
+  outline:none;
+}
+
+.form-input:focus{
+  border-color:var(--gold);
+}
+
+textarea.form-input{
+  resize:none;
+}
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+.confetti{
+  position:fixed;
+  top:45%;
+  left:50%;
+  width:8px;
+  height:15px;
+  z-index:90;
+  pointer-events:none;
+  animation:blast 1.4s ease-out forwards;
+}
+
+@keyframes blast{
+  from{
+    transform:translate(-50%,-50%) rotate(0);
+    opacity:1;
+  }
+  to{
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      rotate(720deg);
+    opacity:0;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:380px){
+
+  .screen{
+    padding-left:17px;
+    padding-right:17px;
+  }
+
+  .intro-title{
+    font-size:45px;
+  }
+
+  .time{
+    min-width:55px;
+  }
+
+  .time-number{
+    font-size:29px;
+  }
+
+  .mystery-box{
+    height:125px;
+    font-size:45px;
+  }
+
+  .gift-card{
+    min-height:275px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="app">
+
+  <!-- ===================================================
+       SCREEN 1
+  ==================================================== -->
+
+  <section class="screen active" id="screen1">
+
+    <div class="intro-content">
+
+      <div class="intro-emoji">
+        🎂
+      </div>
+
+      <div class="label">
+        Something suspicious is coming...
+      </div>
+
+      <h1 class="intro-title">
+        JAY IS<br>
+        <span>TURNING 23</span>
+      </h1>
+
+      <p class="intro-subtitle">
+        22 years completed successfully.
+        A new level is waiting to be unlocked.
+        🎮
+      </p>
+
+      <div class="countdown">
+
+        <div class="time">
+          <div class="time-number" id="days">00</div>
+          <div class="time-label">Days</div>
+        </div>
+
+        <div class="separator">:</div>
+
+        <div class="time">
+          <div class="time-number" id="hours">00</div>
+          <div class="time-label">Hours</div>
+        </div>
+
+        <div class="separator">:</div>
+
+        <div class="time">
+          <div class="time-number" id="minutes">00</div>
+          <div class="time-label">Minutes</div>
+        </div>
+
+        <div class="separator">:</div>
+
+        <div class="time">
+          <div class="time-number" id="seconds">00</div>
+          <div class="time-label">Seconds</div>
+        </div>
+
+      </div>
+
+      <button
+        class="primary"
+        onclick="startBirthday()">
+        🎁 UNLOCK LEVEL 23
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       SCREEN 2
+  ==================================================== -->
+
+  <section class="screen" id="screen2">
+
+    <div class="celebration">
+
+      <div class="celebration-icon">
+        🎉
+      </div>
+
+      <div class="label">
+        ACHIEVEMENT UNLOCKED
+      </div>
+
+      <h1>
+        JAY'S<br>
+        <span>23RD BIRTHDAY!</span>
+      </h1>
+
+      <p>
+        Congratulations! You survived 22 years. 😂
+        Welcome to Level 23.
+      </p>
+
+      <br>
+
+      <button
+        class="primary"
+        onclick="goTo(3)">
+        🎮 OPEN BIRTHDAY LOOT
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       SCREEN 3 — LOOT
+  ==================================================== -->
+
+  <section class="screen" id="screen3">
+
+    <div class="progress">
+      <div class="progress-fill" style="width:33%"></div>
+    </div>
+
+    <div class="label">
+      BONUS MINI GAME
+    </div>
+
+    <h2 class="loot-title">
+      🎁 Pick a Box
+    </h2>
+
+    <p class="loot-subtitle">
+      One of these contains absolutely nothing useful. 😂
+    </p>
+
+    <div class="boxes">
+
+      <button
+        class="mystery-box"
+        onclick="openLoot(this,1)">
+        🎁
+      </button>
+
+      <button
+        class="mystery-box"
+        onclick="openLoot(this,2)">
+        🎁
+      </button>
+
+      <button
+        class="mystery-box"
+        onclick="openLoot(this,3)">
+        🎁
+      </button>
+
+    </div>
+
+    <div
+      class="loot-result"
+      id="lootResult">
+      Choose wisely... 👀
+    </div>
+
+    <button
+      class="primary"
+      id="lootContinue"
+      style="display:none"
+      onclick="goTo(4)">
+      🎁 SHOW ME THE WISHLIST
+    </button>
+
+  </section>
+
+
+  <!-- ===================================================
+       SCREEN 4 — WISHLIST
+  ==================================================== -->
+
+  <section class="screen" id="screen4">
+
+    <div class="progress">
+      <div class="progress-fill" style="width:55%"></div>
+    </div>
+
+    <div class="label">
+      THE IMPORTANT PART
+    </div>
+
+    <h2 class="wishlist-title">
+      🎁 Birthday Wishlist
+    </h2>
+
+    <p class="wishlist-sub">
+      No endless scrolling. Just pick something. 😎
+    </p>
+
+    <div class="gift-slider">
+
+      <div class="gift-card active">
+
+        <div class="gift-icon">🎧</div>
+
+        <h2>Headphones</h2>
+
+        <p>
+          Because good music deserves
+          good headphones.
+        </p>
+
+        <div class="gift-price">
+          ₹1,500 – ₹3,500
+        </div>
+
+        <button
+          class="gift-select"
+          onclick="selectGift('🎧 Headphones')">
+          🎁 I WANT THIS
+        </button>
+
+      </div>
+
+
+      <div class="gift-card">
+
+        <div class="gift-icon">⌚</div>
+
+        <h2>Watch</h2>
+
+        <p>
+          23 years old.
+          Time to look responsible. 😂
+        </p>
+
+        <div class="gift-price">
+          ₹1,000 – ₹5,000
+        </div>
+
+        <button
+          class="gift-select"
+          onclick="selectGift('⌚ Watch')">
+          🎁 I WANT THIS
+        </button>
+
+      </div>
+
+
+      <div class="gift-card">
+
+        <div class="gift-icon">👟</div>
+
+        <h2>Shoes</h2>
+
+        <p>
+          Because apparently one more pair
+          is absolutely necessary.
+        </p>
+
+        <div class="gift-price">
+          ₹1,500 – ₹4,000
+        </div>
+
+        <button
+          class="gift-select"
+          onclick="selectGift('👟 Shoes')">
+          🎁 I WANT THIS
+        </button>
+
+      </div>
+
+
+      <div class="gift-card">
+
+        <div class="gift-icon">👕</div>
+
+        <h2>Clothes</h2>
+
+        <p>
+          Fresh outfit.
+          Fresh Level 23 energy.
+        </p>
+
+        <div class="gift-price">
+          ₹500 – ₹2,000
+        </div>
+
+        <button
+          class="gift-select"
+          onclick="selectGift('👕 Clothes')">
+          🎁 I WANT THIS
+        </button>
+
+      </div>
+
+
+      <div class="gift-card">
+
+        <div class="gift-icon">💳</div>
+
+        <h2>Gift Card</h2>
+
+        <p>
+          For people who don't want
+          to take risks. 😌
+        </p>
+
+        <div class="gift-price">
+          Amazon / Flipkart
+        </div>
+
+        <button
+          class="gift-select"
+          onclick="selectGift('💳 Gift Card')">
+          🎁 I WANT THIS
+        </button>
+
+      </div>
+
+
+      <div class="gift-card">
+
+        <div class="gift-icon">🎁</div>
+
+        <h2>Surprise Me</h2>
+
+        <p>
+          You choose.
+          I trust your judgement. 👀
+        </p>
+
+        <div class="gift-price">
+          Unlimited possibilities
+        </div>
+
+        <button
+          class="gift-select"
+          onclick="selectGift('🎁 Surprise Gift')">
+          🎁 SURPRISE ME
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="slider-controls">
+
+      <button
+        class="arrow"
+        onclick="previousGift()">
+        ←
+      </button>
+
+      <div
+        class="dots"
+        id="giftDots">
+        1 / 6
+      </div>
+
+      <button
+        class="arrow"
+        onclick="nextGift()">
+        →
+      </button>
+
+    </div>
+
+
+    <button
+      class="secondary"
+      onclick="goTo(5)">
+      💸 I'd Rather Send Money
+    </button>
+
+  </section>
+
+
+  <!-- ===================================================
+       SCREEN 5 — MONEY
+  ==================================================== -->
+
+  <section class="screen" id="screen5">
+
+    <div class="progress">
+      <div class="progress-fill" style="width:75%"></div>
+    </div>
+
+    <div class="label">
+      LEVEL 23 UPGRADE FUND
+    </div>
+
+    <h2 class="money-title">
+      💸 Birthday Fund
+    </h2>
+
+    <p class="money-sub">
+      Don't know what to buy?
+      Financial support for Level 23
+      is always appreciated. 😂
+    </p>
+
+    <div class="amounts">
+
+      <button
+        class="amount"
+        onclick="chooseAmount(500,this)">
+        ₹500
+      </button>
+
+      <button
+        class="amount"
+        onclick="chooseAmount(1000,this)">
+        ₹1,000
+      </button>
+
+      <button
+        class="amount"
+        onclick="chooseAmount(2000,this)">
+        ₹2,000
+      </button>
+
+      <button
+        class="amount"
+        onclick="chooseAmount(5000,this)">
+        ₹5,000
+      </button>
+
+    </div>
+
+    <input
+      class="custom"
+      id="customAmount"
+      type="number"
+      min="1"
+      placeholder="Or enter custom amount ₹"
+      oninput="customChanged()"
+    >
+
+    <button
+      class="primary"
+      onclick="payNow()">
+      💸 GENERATE PAYMENT QR
+    </button>
+
+    <button
+      class="secondary"
+      onclick="goTo(4)">
+      ← Back to Wishlist
+    </button>
+
+  </section>
+
+
+  <!-- ===================================================
+       SCREEN 6 — FINAL
+  ==================================================== -->
+
+  <section class="screen final" id="screen6">
+
+    <div class="final-icon">
+      🥳
+    </div>
+
+    <div class="label">
+      MISSION COMPLETE
+    </div>
+
+    <h1>
+      Thank You! ❤️
+    </h1>
+
+    <div class="level-complete">
+      🎮 LEVEL 23 COMPLETE
+    </div>
+
+    <p>
+      Your blessings are compulsory.
+      Gifts are optional...
+      but highly appreciated. 😂
+      <br><br>
+      See you on 4th October!
+    </p>
+
+    <br>
+
+    <button
+      class="primary"
+      onclick="goTo(1)">
+      🔄 PLAY AGAIN
+    </button>
+
+  </section>
+
+</div>
+
+
+<!-- =====================================================
+     GIFT MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="giftModal">
+
+  <div class="modal-box">
+
+    <div style="font-size:50px">
+      🎁
+    </div>
+
+    <h2>
+      Great Choice!
+    </h2>
+
+    <p id="giftModalText">
+      You've selected a gift.
+    </p>
+
+    <input
+      class="form-input"
+      id="guestName"
+      placeholder="Your name">
+
+    <textarea
+      class="form-input"
+      id="guestMessage"
+      rows="3"
+      placeholder="Birthday message ❤️"></textarea>
+
+    <button
+      class="primary"
+      style="margin-top:12px"
+      onclick="sendGiftWhatsApp()">
+      💬 SEND TO JAY
+    </button>
+
+    <button
+      class="close"
+      onclick="closeGiftModal()">
+      Cancel
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     QR MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="qrModal">
+
+  <div class="modal-box">
+
+    <div style="font-size:45px">
+      💸
+    </div>
+
+    <h2>
+      Almost There! 🎉
+    </h2>
+
+    <p>
+      Scan using any UPI app
+    </p>
+
+    <div class="qr">
+      <div id="upiQr"></div>
+    </div>
+
+    <div>
+      Amount:
+      <strong id="qrAmount">
+        ₹0
+      </strong>
+    </div>
+
+    <div class="upi-id">
+      jay127384@oksbi
+    </div>
+
+    <p style="margin-top:10px">
+      Google Pay • PhonePe • Paytm • BHIM
+    </p>
+
+    <button
+      class="primary"
+      style="margin-top:18px"
+      onclick="closeQR();goTo(6)">
+      ❤️ PAYMENT DONE
+    </button>
+
+    <button
+      class="close"
+      onclick="closeQR()">
+      Close
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   STARS
+===================================================== */
+
+const stars =
+  document.getElementById("stars");
+
+for(let i=0;i<35;i++){
+
+  const star =
+    document.createElement("div");
+
+  star.className="star";
+
+  star.style.left =
+    Math.random()*100+"%";
+
+  star.style.animationDelay =
+    Math.random()*8+"s";
+
+  star.style.animationDuration =
+    (5+Math.random()*8)+"s";
+
+  stars.appendChild(star);
+}
+
+
+/* =====================================================
+   SCREEN NAVIGATION
+===================================================== */
+
+function goTo(number){
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen=>{
+      screen.classList.remove("active");
+    });
+
+  const target =
+    document.getElementById(
+      "screen"+number
+    );
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  window.scrollTo(0,0);
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+const birthdayDate =
+  new Date(
+    "October 4, 2026 00:00:00"
+  ).getTime();
+
+function updateCountdown(){
+
+  const diff =
+    birthdayDate-Date.now();
+
+  if(diff<=0){
+
+    setTime("days","00");
+    setTime("hours","00");
+    setTime("minutes","00");
+    setTime("seconds","00");
+
+    return;
+  }
+
+  const days =
+    Math.floor(
+      diff/(1000*60*60*24)
+    );
+
+  const hours =
+    Math.floor(
+      (diff%(1000*60*60*24))/
+      (1000*60*60)
+    );
+
+  const minutes =
+    Math.floor(
+      (diff%(1000*60*60))/
+      (1000*60)
+    );
+
+  const seconds =
+    Math.floor(
+      (diff%(1000*60))/
+      1000
+    );
+
+  setTime(
+    "days",
+    String(days).padStart(2,"0")
+  );
+
+  setTime(
+    "hours",
+    String(hours).padStart(2,"0")
+  );
+
+  setTime(
+    "minutes",
+    String(minutes).padStart(2,"0")
+  );
+
+  setTime(
+    "seconds",
+    String(seconds).padStart(2,"0")
+  );
+}
+
+function setTime(id,value){
+
+  document.getElementById(id)
+    .innerText=value;
+}
+
+updateCountdown();
+
+setInterval(
+  updateCountdown,
+  1000
+);
+
+
+/* =====================================================
+   START BIRTHDAY
+===================================================== */
+
+function startBirthday(){
+
+  createConfetti();
+
+  goTo(2);
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function createConfetti(){
+
+  const colors=[
+    "#f5c451",
+    "#ffffff",
+    "#ef4d4d",
+    "#55a9ff",
+    "#7be495",
+    "#c06cff"
+  ];
+
+  for(let i=0;i<90;i++){
+
+    const piece =
+      document.createElement("div");
+
+    piece.className="confetti";
+
+    const angle =
+      Math.random()*Math.PI*2;
+
+    const distance =
+      180+Math.random()*600;
+
+    piece.style.setProperty(
+      "--x",
+      Math.cos(angle)*distance+"px"
+    );
+
+    piece.style.setProperty(
+      "--y",
+      Math.sin(angle)*distance+"px"
+    );
+
+    piece.style.background =
+      colors[
+        Math.floor(
+          Math.random()*colors.length
+        )
+      ];
+
+    piece.style.animationDelay =
+      Math.random()*.35+"s";
+
+    document.body.appendChild(piece);
+
+    setTimeout(()=>{
+      piece.remove();
+    },1800);
+  }
+}
+
+
+/* =====================================================
+   LOOT GAME
+===================================================== */
+
+let lootOpened=false;
+
+const lootMessages=[
+
+  "😂 You found... absolutely nothing. But nice try!",
+
+  "🎉 JACKPOT! You unlocked +100 Birthday Karma!",
+
+  "💰 You found the secret Level 23 upgrade... MONEY! 😂"
+
+];
+
+function openLoot(box,number){
+
+  if(lootOpened){
+    return;
+  }
+
+  lootOpened=true;
+
+  box.classList.add("opened");
+
+  box.innerText="✨";
+
+  document.getElementById(
+    "lootResult"
+  ).innerText =
+    lootMessages[number-1];
+
+  document.getElementById(
+    "lootContinue"
+  ).style.display="block";
+
+  createConfetti();
+}
+
+
+/* =====================================================
+   WISHLIST SLIDER
+===================================================== */
+
+let currentGift=0;
+
+const giftCards =
+  document.querySelectorAll(
+    ".gift-card"
+  );
+
+function showGift(index){
+
+  if(index<0){
+    index=giftCards.length-1;
+  }
+
+  if(index>=giftCards.length){
+    index=0;
+  }
+
+  currentGift=index;
+
+  giftCards.forEach(
+    card=>{
+      card.classList.remove("active");
+    }
+  );
+
+  giftCards[currentGift]
+    .classList.add("active");
+
+  document.getElementById(
+    "giftDots"
+  ).innerText =
+    `${currentGift+1} / ${giftCards.length}`;
+}
+
+function nextGift(){
+  showGift(currentGift+1);
+}
+
+function previousGift(){
+  showGift(currentGift-1);
+}
+
+
+/* =====================================================
+   SWIPE SUPPORT
+===================================================== */
+
+let touchStartX=0;
+
+const slider =
+  document.querySelector(
+    ".gift-slider"
+  );
+
+slider.addEventListener(
+  "touchstart",
+  e=>{
+    touchStartX =
+      e.changedTouches[0].screenX;
+  },
+  {passive:true}
+);
+
+slider.addEventListener(
+  "touchend",
+  e=>{
+
+    const touchEndX =
+      e.changedTouches[0].screenX;
+
+    const difference =
+      touchStartX-touchEndX;
+
+    if(Math.abs(difference)>50){
+
+      if(difference>0){
+        nextGift();
+      }else{
+        previousGift();
+      }
+
+    }
+  },
+  {passive:true}
+);
+
+
+/* =====================================================
+   GIFT MODAL
+===================================================== */
+
+let selectedGift="";
+
+function selectGift(gift){
+
+  selectedGift=gift;
+
+  document.getElementById(
+    "giftModalText"
+  ).innerText =
+    `You selected ${gift}.`;
+
+  document.getElementById(
+    "giftModal"
+  ).classList.add("show");
+}
+
+function closeGiftModal(){
+
+  document.getElementById(
+    "giftModal"
+  ).classList.remove("show");
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function sendGiftWhatsApp(){
+
+  const name =
+    document.getElementById(
+      "guestName"
+    ).value.trim()
+    || "Someone";
+
+  const message =
+    document.getElementById(
+      "guestMessage"
+    ).value.trim()
+    || "Happy Birthday Jay! 🎂";
+
+  const phone =
+    "917229056491";
+
+  const text =
+    `🎂 Jay's 23rd Birthday 🎂\n\n`+
+    `👤 Name: ${name}\n`+
+    `🎁 Gift: ${selectedGift}\n`+
+    `💬 Message: ${message}`;
+
+  const url =
+    "https://wa.me/"+
+    phone+
+    "?text="+
+    encodeURIComponent(text);
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+  closeGiftModal();
+}
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+let selectedAmount=0;
+
+function chooseAmount(
+  amount,
+  button
+){
+
+  selectedAmount=amount;
+
+  document
+    .querySelectorAll(".amount")
+    .forEach(btn=>{
+      btn.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  document.getElementById(
+    "customAmount"
+  ).value=amount;
+}
+
+function customChanged(){
+
+  const value =
+    Number(
+      document.getElementById(
+        "customAmount"
+      ).value
+    );
+
+  if(value>0){
+
+    selectedAmount=value;
+
+    document
+      .querySelectorAll(".amount")
+      .forEach(btn=>{
+        btn.classList.remove(
+          "selected"
+        );
+      });
+  }
+}
+
+
+/* =====================================================
+   UPI QR
+===================================================== */
+
+const UPI_ID =
+  "jay127384@oksbi";
+
+const UPI_NAME =
+  "Jay Patel";
+
+function payNow(){
+
+  const custom =
+    Number(
+      document.getElementById(
+        "customAmount"
+      ).value
+    );
+
+  if(custom>0){
+    selectedAmount=custom;
+  }
+
+  if(!selectedAmount){
+
+    alert(
+      "Choose an amount first 😄"
+    );
+
+    return;
+  }
+
+  generateQR();
+
+  document.getElementById(
+    "qrAmount"
+  ).innerText =
+    "₹"+
+    Number(
+      selectedAmount
+    ).toLocaleString("en-IN");
+
+  document.getElementById(
+    "qrModal"
+  ).classList.add("show");
+}
+
+function generateQR(){
+
+  const container =
+    document.getElementById(
+      "upiQr"
+    );
+
+  container.innerHTML="";
+
+  const upiURL =
+    "upi://pay?"+
+    "pa="+
+    encodeURIComponent(UPI_ID)+
+    "&pn="+
+    encodeURIComponent(UPI_NAME)+
+    "&am="+
+    encodeURIComponent(selectedAmount)+
+    "&cu=INR";
+
+  if(typeof QRCode==="undefined"){
+
+    container.innerHTML=
+      "<p style='color:#111'>QR library could not load.</p>";
+
+    return;
+  }
+
+  new QRCode(
+    container,
+    {
+      text:upiURL,
+      width:210,
+      height:210,
+      colorDark:"#000000",
+      colorLight:"#ffffff",
+      correctLevel:
+        QRCode.CorrectLevel.H
+    }
+  );
+}
+
+function closeQR(){
+
+  document.getElementById(
+    "qrModal"
+  ).classList.remove("show");
+}
+
+
+/* =====================================================
+   MODAL OUTSIDE CLICK
+===================================================== */
+
+document
+  .getElementById("giftModal")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target===this){
+        closeGiftModal();
+      }
+
+    }
+  );
+
+document
+  .getElementById("qrModal")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target===this){
+        closeQR();
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key==="Escape"){
+
+      closeGiftModal();
+      closeQR();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
